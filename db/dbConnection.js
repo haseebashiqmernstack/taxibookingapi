@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose=require('mongoose');
 
 exports.init=()=>{
-    mongoose.connect(process.env.onlineDb,
+    mongoose.connect(process.env.dbLocal,
         { useCreateIndex: true,
             useFindAndModify: false, 
             useNewUrlParser: true, 

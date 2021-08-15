@@ -57,3 +57,22 @@ exports.rideConfirm=async(req,res)=>{
          }
     })
 }
+
+exports.rideCancel=async(req,res)=>{
+    const id=req.params.id;
+    await Bookings.findOne({_id:id})
+    .exec(async (_error,_booking)=>{
+         if(_error) {return await res.status(400).json({_error:_error.message})}
+         if(_booking)
+         {
+             await Bookings.updateOne({_id:_booking._id},{isConfirm:req.body.isCancel})
+             .exec(async (_error,_bookingRide)=>{
+                if(_error) {return await res.status(400).json({_error:_error.message})}
+                if(_bookingRide)
+                {
+                    return await res.status(201).json({updated:_bookingRide})
+                }
+             })
+         }
+    })
+}

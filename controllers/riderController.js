@@ -46,3 +46,41 @@ exports.riderDelete=async (req,res) => {
             }
     })
 }
+
+exports.riderActive=async(req,res)=>{
+    const id=req.params.id;
+    await Riders.findOne({_id:id})
+    .exec(async (_error,_rider)=>{
+         if(_error) {return await res.status(400).json({_error:_error.message})}
+         if(_rider)
+         {
+             await Riders.updateOne({_id:_rider._id},{active:req.body.active})
+             .exec(async (_error,_rid)=>{
+                if(_error) {return await res.status(400).json({_error:_error.message})}
+                if(_rid)
+                {
+                    return await res.status(201).json({update:_rid})
+                }
+             })
+         }
+    })
+}
+
+exports.riderDeactive=async(req,res)=>{
+    const id=req.params.id;
+    await Riders.findOne({_id:id})
+    .exec(async (_error,_rider)=>{
+         if(_error) {return await res.status(400).json({_error:_error.message})}
+         if(_rider)
+         {
+             await Riders.updateOne({_id:_rider._id},{active:req.body.active})
+             .exec(async (_error,_rid)=>{
+                if(_error) {return await res.status(400).json({_error:_error.message})}
+                if(_rid)
+                {
+                    return await res.status(201).json({update:_rid})
+                }
+             })
+         }
+    })
+}
