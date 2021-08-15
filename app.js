@@ -16,7 +16,7 @@ apps.use(cookieParser());
 apps.get('/', function(request, response) {
     var result = 'App is running'
     response.send(result);
-}).listen(app.get('port'), function() {
+}).listen(apps.get('port'), function() {
     console.log('App is running, server is listening on port ', apps.get('port'));
 });
 
